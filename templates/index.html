@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TNL² - CHAT</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="./styles/styles.css">
+  </head>
+  <body
+    class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300"
+  >
+    <div
+      id="toast"
+      class="fixed top-4 right-4 bg-red-500 text-white px-5 py-3 rounded-lg shadow-xl opacity-0 pointer-events-none transition-opacity duration-300 z-50 text-base font-medium select-none"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+    ></div>
+
+    <header
+      class="bg-gradient-to-r from-gray-800 to-gray-900 py-3 px-4 shadow-md flex items-center justify-center w-full z-10 border-b border-gray-700 flex-shrink-0"
+    >
+      <h1
+        class="text-xl font-semibold tracking-tight text-white dark:text-white"
+      >
+        TNL² - CHAT
+      </h1>
+    </header>
+
+    <div
+      id="appContainer"
+      class="bg-white dark:bg-gray-800 shadow-xl rounded-none sm:rounded-none"
+    >
+      <main
+        id="chatContainer"
+        class="flex-grow overflow-y-auto p-4 sm:p-6 space-y-6 bg-white dark:bg-gray-800 pt-2"
+      ></main>
+
+      <footer
+        class="p-3 sm:p-4 bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 flex-shrink-0"
+      >
+        <div id="imagePreviewContainer" class="px-2 pb-3 hidden">
+          <div
+            class="relative inline-block border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden shadow-sm group mb-2"
+          >
+            <img
+              id="imagePreview"
+              alt="Pré-visualização da imagem anexada"
+              class="max-w-[150px] max-h-[120px] object-cover rounded-lg"
+              tabindex="0"
+            />
+            <button
+              id="removeImageBtn"
+              title="Remover Imagem"
+              class="absolute top-1 right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-200 focus:opacity-100"
+              aria-label="Remover imagem anexada"
+            >
+              &times;
+            </button>
+          </div>
+        </div>
+
+        <form
+          id="chatForm"
+          class="flex items-end bg-white dark:bg-gray-700 rounded-full p-2 shadow-lg ring-1 ring-gray-100 dark:ring-gray-600 mb-4 mx-auto max-w-4xl"
+          autocomplete="off"
+        >
+          <label
+            for="imageInput"
+            aria-label="Anexar imagem"
+            class="cursor-pointer p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-full transition-colors duration-200 flex-shrink-0"
+            title="Anexar imagem"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="w-6 h-6"
+            >
+              <path
+                d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.59a2 2 0 0 1-2.83-2.83l8.49-8.48"
+              ></path>
+            </svg>
+          </label>
+          <textarea
+            id="promptInput"
+            rows="1"
+            placeholder="Mensagem..."
+            class="flex-grow resize-none bg-transparent py-2 px-3 text-gray-800 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none text-base leading-relaxed max-h-40 overflow-y-auto"
+          ></textarea>
+          <button
+            type="submit"
+            aria-label="Enviar mensagem"
+            class="p-2 ml-1 rounded-full bg-blue-600 text-white shadow-md hover:bg-blue-700 transition-all duration-200 disabled:bg-gray-300 dark:disabled:bg-gray-600 disabled:text-gray-500 dark:disabled:text-gray-400 disabled:cursor-not-allowed disabled:shadow-none flex-shrink-0"
+            title="Enviar"
+            disabled
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="w-6 h-6"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </button>
+        </form>
+        <small
+          class="text-center block text-xs text-gray-400 dark:text-gray-500 mt-2 font-medium select-none tracking-wide opacity-80"
+        >
+          Desenvolvido por
+          <a
+            href="https://github.com/thalissonmoura"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:underline text-gray-600 dark:text-gray-400"
+            >Thalisson Moura</a
+          >
+        </small>
+      </footer>
+    </div>
+
+    <input type="file" id="imageInput" accept="image/*" class="hidden" />
+
+    <script src="./script/script.js">
+    </script>
+  </body>
+</html>
